@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TradeCalculator } from '@/components/TradeCalculator';
 import { BestValueTracker } from '@/components/BestValueTracker';
-import { LeagueImporter } from '@/components/LeagueImporter';
-import { LeagueAnalyzer } from '@/components/LeagueAnalyzer';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { 
@@ -12,17 +10,10 @@ import {
   Users, 
   BarChart3,
   Zap,
-  Target,
-  Download
+  Target
 } from 'lucide-react';
 
 const Index = () => {
-  const [importedLeague, setImportedLeague] = useState<any>(null);
-
-  const handleLeagueImported = (leagueData: any) => {
-    setImportedLeague(leagueData);
-  };
-
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -58,7 +49,7 @@ const Index = () => {
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
         <Tabs defaultValue="calculator" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-8">
+          <TabsList className="grid w-full grid-cols-2 mb-8">
             <TabsTrigger value="calculator" className="flex items-center gap-2">
               <Calculator className="h-4 w-4" />
               Trade Calculator
@@ -66,14 +57,6 @@ const Index = () => {
             <TabsTrigger value="values" className="flex items-center gap-2">
               <TrendingUp className="h-4 w-4" />
               Best Values
-            </TabsTrigger>
-            <TabsTrigger value="import" className="flex items-center gap-2">
-              <Download className="h-4 w-4" />
-              Import League
-            </TabsTrigger>
-            <TabsTrigger value="analysis" className="flex items-center gap-2">
-              <BarChart3 className="h-4 w-4" />
-              League Analysis
             </TabsTrigger>
           </TabsList>
 
@@ -84,18 +67,10 @@ const Index = () => {
           <TabsContent value="values">
             <BestValueTracker />
           </TabsContent>
-
-          <TabsContent value="import">
-            <LeagueImporter onLeagueImported={handleLeagueImported} />
-          </TabsContent>
-
-          <TabsContent value="analysis">
-            <LeagueAnalyzer leagueData={importedLeague} />
-          </TabsContent>
         </Tabs>
 
         {/* Features Overview */}
-        <div className="mt-16 grid md:grid-cols-4 gap-6">
+        <div className="mt-16 grid md:grid-cols-3 gap-6">
           <Card className="p-6 bg-gradient-card shadow-card">
             <div className="flex items-center gap-3 mb-4">
               <Calculator className="h-8 w-8 text-primary" />
@@ -126,17 +101,6 @@ const Index = () => {
             <p className="text-muted-foreground">
               Track the best value players across all positions. Identify 
               undervalued assets and potential trade targets.
-            </p>
-          </Card>
-
-          <Card className="p-6 bg-gradient-card shadow-card">
-            <div className="flex items-center gap-3 mb-4">
-              <Download className="h-8 w-8 text-primary" />
-              <h3 className="text-lg font-semibold">League Import</h3>
-            </div>
-            <p className="text-muted-foreground">
-              Import your league from Sleeper, ESPN Fantasy, and other platforms. 
-              Get personalized trade recommendations based on your team's needs.
             </p>
           </Card>
         </div>
